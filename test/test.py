@@ -21,9 +21,9 @@ async def test_project(dut):
 
     addends = [i for i in range(16)]
 
-    i for i in range(16):
+    for i in range(16):
         dut.a.value = addends[i]
-        j for j in range(16):
+        for j in range(16):
             dut.b.value = addends[j]
 
         # Wait for one clock cycle to see the output values
