@@ -17,18 +17,24 @@ async def test_project(dut):
     dut._log.info("Test project behavior")
 
     # Set the input values you want to test
-    dut.a.value = 13
-    dut.b.value = 10
 
-    # Wait for one clock cycle to see the output values
-    await ClockCycles(dut.clk, 10)
 
-    # The following assersion is just an example of how to check the output values.
-    # Change it to match the actual expected output of your module:
-    dut._log.info(f"value of outputs are: {dut.sum.value} and {dut.carry_out.value}.")
-    # If these passes don't work, fail the program and show what you failed.
-    assert dut.sum.value == 7 and dut.carry_out.value == 1
+    addends = [i in range(16)]
 
-    # Keep testing the module by changing the input values, waiting for
-    # one or more clock cycles, and asserting the expected output values.
+    for i in range(16):
+        dut.a.value = addends[i]
+        for j in range(16):
+            dut.b.value = addends[j]
+
+        # Wait for one clock cycle to see the output values
+        await ClockCycles(dut.clk, 10)
+
+        # The following assersion is just an example of how to check the output values.
+        # Change it to match the actual expected output of your module:
+        dut._log.info(f"value of outputs are: {dut.sum.value} and {dut.carry_out.value}.")
+        # If these passes don't work, fail the program and show what you failed.
+        assert dut.sum.value == ((addends[i] + addends[j]) % 16) and dut.carry_out.value == ((addends[i] + addends[j]) >= 16)
+
+        # Keep testing the module by changing the input values, waiting for
+        # one or more clock cycles, and asserting the expected output values.
     
