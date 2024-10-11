@@ -26,7 +26,8 @@ async def test_project(dut):
     # The following assersion is just an example of how to check the output values.
     # Change it to match the actual expected output of your module:
     dut._log.info(f"value of outputs are: {dut.sum.value} and {dut.carry_out.value}.")
-    assert dut.sum.value == 7 and dut.carry_out.value == 1 
+    # If these passes don't work, fail the program and show what you failed.
+    assert dut.sum.value == 7 and dut.carry_out.value == 1
 
     # Keep testing the module by changing the input values, waiting for
     # one or more clock cycles, and asserting the expected output values.
