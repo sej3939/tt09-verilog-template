@@ -9,12 +9,12 @@ You can also include images in this folder and reference them in the markdown. E
 
 ## How it works
 
-Explain how your project works
+Simple and fast 4-bit Koggestone adder
 
 ## How to test
 
-Explain how to use your project
+ui_in[3:0] is addend 1, and ui_in[3:0] is addend 2. ui_out[3:0] is sum, and ui_out[4] is carry_out.
 
 ## External hardware
 
-List external hardware used in your project (e.g. PMOD, LED display, etc), if any
+No external hardware needed
