@@ -19,11 +19,11 @@ async def test_project(dut):
     # Set the input values you want to test
 
 
-    addends = [i for i in range(16)]
+    addends = [i for i in range(-32,32)]
 
-    for i in range(16):
+    for i in range(64):
         dut.a.value = addends[i]
-        for j in range(16):
+        for j in range(64):
             dut.b.value = addends[j]
 
             # Wait for one clock cycle to see the output values
@@ -33,7 +33,7 @@ async def test_project(dut):
             # Change it to match the actual expected output of your module:
             dut._log.info(f"value of outputs are: {dut.sum.value} and {dut.carry_out.value}.")
             # If these passes don't work, fail the program and show what you failed.
-            assert dut.sum.value == ((addends[i] + addends[j]) % 16) and dut.carry_out.value == ((addends[i] + addends[j]) >= 16)
+            assert dut.sum.value == ((addends[i] + addends[j]) & 15) and dut.carry_out.value == ((addends[i] + addends[j]) & (1<<4))
     
             # Keep testing the module by changing the input values, waiting for
             # one or more clock cycles, and asserting the expected output values.
